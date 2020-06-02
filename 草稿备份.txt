@@ -1,0 +1,70 @@
+client.validateLogon(userStrBox.getText(),
+						passStrBox.getPassword().toString().trim())
+
+private UserManager userManager;
+	private StudentManager studentManager;
+	private CourseManager courseManager;
+	
+	public Manager(UserManager userManager, StudentManager studentManager, CourseManager courseManager) {
+		this.userManager = userManager;
+		this.studentManager = studentManager;
+		this.courseManager = courseManager;
+	}
+	
+
+
+StringBuffer buffer = new StringBuffer();
+		for (Course course: courseMap.keySet()) {
+			if (courseMap.get(course) == null || courseMap.get(course).size() == 0) {
+				continue;
+			}else {
+				buffer.append("课程名：" + course.getCourseName() + "\n");
+				for (Student student : courseMap.get(course)) {
+					if (student.getAchiList() == null || student.getAchiList().size() == 0) {
+						continue;
+					}else {
+						for (Achievement achi : student.getAchiList()) {
+							buffer.append(student.getName() + " " + achi.getGrade() + ",");
+						}
+						buffer.append("\n");
+					}
+				}
+			}
+		}
+		return buffer.toString();
+
+
+package StudentSystem2.model;
+
+public class Achievement {
+	private Course course;							//这个成绩属于的课程的ID
+	private Double grade;								//成绩数值
+	
+	public Achievement() {
+		this.course = null;
+		this.grade = 0.0;
+	}
+	public Achievement(Course course, Double grade) {
+		this.course = course;
+		this.grade = grade;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+
+	public Double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Double grade) {
+		this.grade = grade;
+	}
+	
+	public String toString() {
+		return course.toString() + grade.toString();
+	}
+	
+	
+}
